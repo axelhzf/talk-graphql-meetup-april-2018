@@ -9,6 +9,7 @@ const defaultColors = {
   tertiary: '#117BD8',
   quarternary: 'white',
   bg: '#F4F4F7',
+  bgCode: '#2a2734',
   pink: '#E12EA1'
 };
 
@@ -182,7 +183,7 @@ const screen = (colorArgs = defaultColors, fontArgs = defaultFonts) => {
       },
       codePane: {
         margin: 'auto',
-        fontSize: '0.8rem',
+        fontSize: '1.5rem',
         fontWeight: 'normal',
         minWidth: '100%',
         maxWidth: 800,

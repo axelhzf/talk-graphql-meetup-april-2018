@@ -15,6 +15,7 @@ import {
   Text,
   Image,
   CodePane,
+  Layout,
   Fit,
   Fill,
   S
@@ -29,21 +30,20 @@ const theme = createTheme();
 export default class Presentation extends React.Component {
   render() {
     return (
-      <Deck
-        theme={theme}
-        progress="bar"
-        transition={['fade']}
-        transitionDuration={100}
-      >
-        <Slide
-          bgColor="#171C22"
-          bgImage={require('./images/graph-wash.png')}
-        >
-          <Heading size={2} textColor='white'>
-            Connecting the dots with <S type="bold" textColor="pink">GraphQL</S>
+      <Deck theme={theme} progress="bar" transition={[]} transitionDuration={0}>
+        <Slide bgColor="#171C22" bgImage={require('./images/graph-wash.png')}>
+          <Heading size={2} textColor="white">
+            Connecting the dots with{' '}
+            <S type="bold" textColor="pink">
+              GraphQL
+            </S>
           </Heading>
-          <Image margin="40px auto 0 auto" height={200} src={require('./images/gql-logo.svg')} />
-          <Text margin="40px 0 0 0" textColor='white'>
+          <Image
+            margin="40px auto 0 auto"
+            height={200}
+            src={require('./images/gql-logo.svg')}
+          />
+          <Text margin="40px 0 0 0" textColor="white">
             Axel Hernández Ferrera (@axelhzf)
           </Text>
         </Slide>
@@ -72,13 +72,15 @@ export default class Presentation extends React.Component {
           </List>
         </Slide>
         <Slide>
-          <Heading size={3} >Other companies working on the same problem at the same time</Heading>
+          <Heading size={3}>
+            Other companies working on the same problem at the same time
+          </Heading>
         </Slide>
         <Slide>
           <Heading>GraphQL Syntax</Heading>
         </Slide>
-        <Slide bgColor="gray1">
-          <GqlPane>
+        <Slide bgColor="bgCode">
+          <GqlCode>
             {`
 {
   me {
@@ -86,19 +88,36 @@ export default class Presentation extends React.Component {
   }
 }
             `}
-          </GqlPane>
-          <JsonPane>
-            {`
+          </GqlCode>
+        </Slide>
+        <Slide bgColor="bgCode">
+          <Layout>
+            <Fill>
+              <GqlCode>
+                {`
+{
+  me {
+    name
+  }
+}
+            `}
+              </GqlCode>
+            </Fill>
+            <Fill>
+              <JsonCode>
+                {`
 {
   "me": {
     "name": "Axel"
   }
 }
             `}
-          </JsonPane>
+              </JsonCode>
+            </Fill>
+          </Layout>
         </Slide>
-        <Slide>
-          <GqlPane>
+        <Slide bgColor="bgCode">
+          <GqlCode>
             {`
 {
   user(id: 123) {
@@ -107,10 +126,10 @@ export default class Presentation extends React.Component {
   }
 }
             `}
-          </GqlPane>
+          </GqlCode>
         </Slide>
-        <Slide>
-          <GqlPane>
+        <Slide bgColor="bgCode">
+          <GqlCode>
             {`
 {
   me {
@@ -123,11 +142,11 @@ export default class Presentation extends React.Component {
   }
 }
             `}
-          </GqlPane>
+          </GqlCode>
         </Slide>
 
-        <Slide>
-          <GqlPane>
+        <Slide bgColor="bgCode">
+          <GqlCode>
             {`
 {
   me {
@@ -140,10 +159,10 @@ export default class Presentation extends React.Component {
   }
 }
             `}
-          </GqlPane>
+          </GqlCode>
         </Slide>
-        <Slide>
-          <GqlPane>
+        <Slide bgColor="bgCode">
+          <GqlCode>
             {`
 {
   me {
@@ -161,12 +180,14 @@ export default class Presentation extends React.Component {
   }
 }
             `}
-          </GqlPane>
+          </GqlCode>
         </Slide>
 
-        <Slide>
-          <GqlPane>
-            {`
+        <Slide bgColor="bgCode">
+          <Layout>
+            <Fill>
+              <GqlCode>
+                {`
 {
   shows {
     id
@@ -178,9 +199,11 @@ export default class Presentation extends React.Component {
   }
 }
   `}
-          </GqlPane>
-          <JsonPane>
-            {`
+              </GqlCode>
+            </Fill>
+            <Fill>
+              <JsonCode>
+                {`
 {
   "shows": [
     {
@@ -195,13 +218,13 @@ export default class Presentation extends React.Component {
   }
 }
             `}
-          </JsonPane>
-          Modelo mental, es realmente sencillo crear una query si sabes el
-          formato que van a tener los datos que necesitas
+              </JsonCode>
+            </Fill>
+          </Layout>
         </Slide>
 
-        <Slide>
-          <GqlPane>
+        <Slide bgColor="bgCode">
+          <GqlCode>
             {`
 {
   shows {
@@ -214,11 +237,11 @@ export default class Presentation extends React.Component {
   }
 }
   `}
-          </GqlPane>
+          </GqlCode>
         </Slide>
 
-        <Slide>
-          <GqlPane>{`
+        <Slide bgColor="bgCode">
+          <GqlCode>{`
 {
   shows(sort: trending) {
     id
@@ -232,7 +255,7 @@ export default class Presentation extends React.Component {
     }
   }
 }
-      `}</GqlPane>
+      `}</GqlCode>
         </Slide>
         <Slide>
           <Heading>GraphQL vs Rest</Heading>
@@ -241,13 +264,19 @@ export default class Presentation extends React.Component {
           <Heading>Overteching</Heading>
         </Slide>
         <Slide>
-          <Image src={require('./images/catflix.png')} />
+          <Layout>
+            <Fill>
+              <Image
+                src={require('./images/catflix.png')}
+                style={{ maxHeight: '39rem' }}
+              />
+            </Fill>
+          </Layout>
         </Slide>
-        <Slide>
-          <Heading size={2}>Overfetching</Heading>
-          <div>/movies</div>
-          <JSPane>
+        <Slide bgColor="bgCode">
+          <JsCode textSize={16}>
             {`
+      // /movies
       [{
         "id": "tt2527336",
         "title": "Star Wars: The Last Jedi",
@@ -263,14 +292,13 @@ export default class Presentation extends React.Component {
           { "lang": "en", "quality": "1080p", "url": "http://..." }
           { "lang": "en", "quality": "720p", "url": "http://..." }
         ]
-      }
-      ]
+      }]
             `}
-          </JSPane>
+          </JsCode>
         </Slide>
 
-        <Slide>
-          <GqlPane>
+        <Slide bgColor="bgCode">
+          <GqlCode>
             {`
 {
   movies {
@@ -282,7 +310,7 @@ export default class Presentation extends React.Component {
   }
 }
         `}
-          </GqlPane>
+          </GqlCode>
         </Slide>
 
         <Slide>
@@ -290,16 +318,24 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide>
-          <Heading size={2}>Getting last episode of liked shows</Heading>
-          <List>
-            <List>/user</List>
-            <List>/shows/:id</List>
-            <List>/shows/:id/episodes</List>
-          </List>
+          <Heading size={2} textAlign="left">
+            Use case
+          </Heading>
+          <Heading fit>Getting the last episode of user liked shows</Heading>
         </Slide>
 
-        <Slide>
-          <GqlPane>{`
+        <Slide bgColor="bgCode">
+          <JsCode>
+            {`
+            /user
+            /shows/:id
+            /shows/:id/episodes
+        `}
+          </JsCode>
+        </Slide>
+
+        <Slide bgColor="bgCode">
+          <GqlCode>{`
 {
   user {
     likedShows {
@@ -310,50 +346,48 @@ export default class Presentation extends React.Component {
     }
   }
 }
-          `}</GqlPane>
+          `}</GqlCode>
         </Slide>
 
         <Slide>
-          <Heading>GraphQL APIs have a strongly typed schema</Heading>
+          <Heading fit>GraphQL APIs have a strongly typed schema</Heading>
         </Slide>
 
-        <Slide>
-          <GqlPane>
+        <Slide bgColor="bgCode">
+          <GqlCode>
             {`
 type Movie {
-    id: String
+    id: String!
     title: String!
     year: String!
     synopsis: String!
     trailer: String
-    torrents: [Torrent!]
-    images: Images
+    torrents: [Torrent!]!
+    images: Images!
 }
 
 type Torrent {
+    url: String!
     lang: String
-    quality: String!
-    url: String
+    quality: String
 }
 
             `}
-          </GqlPane>
+          </GqlCode>
         </Slide>
 
-        <Slide>
-          <GqlPane>
+        <Slide bgColor="bgCode">
+          <GqlCode>
             {`
 type Query {
-    movies(page: Int, sort: SortOptions, order: Int, keywords: String, genre: String) : [Movie]
+    movies(sort: SortOptions, search: String) : [Movie!]!
     movie(id: String!): Movie
-    shows(page: Int, sort: SortOptions, order: Int, keywords: String, genre: String): [Show]
+    shows(sort: SortOptions, search: String): [Show!]!
     show(id: String!): Show
-    status: Status
-    devices: [Device]
 }
 
 type Mutation {
-    playEpisode(showId: String!, season: Int!, episode: Int!): Episode!
+    playEpisode(id: String!): Episode!
     playMovie(id: String!): Movie!
 }
 
@@ -362,34 +396,33 @@ schema {
     mutation: Mutation
 }
   `}
-          </GqlPane>
+          </GqlCode>
         </Slide>
 
         <Slide>
-          <Heading size={2}>
-            Instronspection: Query that return the type definition
-          </Heading>
+          <Heading size={2}>Instronspection</Heading>
+          <Heading size={5}>Query that return the type definition</Heading>
         </Slide>
 
         <Slide>
           <Heading size={2}>API documentation</Heading>
-          <div>No more outdated swagger</div>
+          <Heading size={5}>No more outdated swagger</Heading>
         </Slide>
 
         <Slide>
-          <iframe src="http://graphql.org/swapi-graphql" />
+          <iframe
+            src="http://graphql.org/swapi-graphql"
+          />
         </Slide>
 
         <Slide>
-          <Heading size={2}>
-            Query validation: Validate the query before doing it
-          </Heading>
-          <img src={require('./images/query-validation.png')} />
+          <Heading size={2}>Query validation</Heading>
+          <Image src={require('./images/query-validation.png')} margin="40px auto"/>
         </Slide>
 
         <Slide>
           <Heading size={2}>IDE Integration</Heading>
-          <img src={require('./images/ide-integration.gif')} />
+          <Image src={require('./images/ide-integration.gif')} margin="40px auto"/>
         </Slide>
 
         <Slide>
@@ -409,7 +442,9 @@ schema {
         </Slide>
 
         <Slide>
-          <Heading size={2}>Client side data fetching is a hard problem</Heading>
+          <Heading size={2} fit>
+            Client side data fetching is a hard problem
+          </Heading>
           <List>
             <ListItem>Caching</ListItem>
             <ListItem>Realtime</ListItem>
@@ -419,12 +454,9 @@ schema {
           </List>
         </Slide>
 
-        <Slide>
-          <Heading>Apollo</Heading>
-
-          <JSPane>
-            {`
-const query = gql\`
+        <Slide bgColor="bgCode">
+          <JsCode>
+            {`const query = gql\`
   query {
       todos {
           title
@@ -437,12 +469,14 @@ const Todos = () => (
     {(loading, error, data) => {
       if (loading) return <div>Loading...</div>
       if (error) return <div>Error...</div>
-      return <ul>{data.todos.map(todo => <li>{todo.title}</li>)}</ul>
+      return <ul>{data.todos.map(todo =>
+        <li>{todo.title}</li>
+      )}</ul>
     }}
   </Query>
 )
            `}
-          </JSPane>
+          </JsCode>
         </Slide>
 
         <Slide>
@@ -461,7 +495,7 @@ const Todos = () => (
             </ListItem>
             <ListItem>
               <a href="https://github.com/graphcool/prisma">
-                Graphqcool / prisma
+                graphcool / prisma
               </a>
             </ListItem>
             <ListItem>
@@ -469,24 +503,22 @@ const Todos = () => (
             </ListItem>
           </List>
         </Slide>
+
+        <Slide>
+          <Heading>Thanks</Heading>
+        </Slide>
       </Deck>
     );
   }
 }
 
-const Heading1 = props => <Heading size={2} {...props} />;
-
-const JSPane = ({ children }) => (
-  <CodePane textSize="1.5rem" lang="javascript" source={children} />
+const JsCode = ({ children, ...other }) => (
+  <CodePane lang="javascript" source={children} {...other} />
 );
 
-const GqlPane = ({ children }) => (
-  <CodePane textSize="1.5rem" lang="graphql" source={children} />
-);
+const GqlCode = ({ children }) => <CodePane lang="graphql" source={children} />;
 
-const JsonPane = ({ children }) => (
-  <CodePane textSize="1.5rem" lang="json" source={children} />
-);
+const JsonCode = ({ children }) => <CodePane lang="json" source={children} />;
 
 const Link = ({ href, title }) => (
   <a href={href} target="_blank">
