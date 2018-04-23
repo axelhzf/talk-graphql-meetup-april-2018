@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "parcel index.html",
-    "build": "rm -rf docs && parcel build -d docs index.html "
+    "build": "rm -rf docs && parcel build -d docs --public-url . index.html",
+    "deploy": "npm run build && git add . && git commit -m deploy && git push"
   }
 }
