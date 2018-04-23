@@ -33,7 +33,7 @@ export default class Presentation extends React.Component {
       <Deck theme={theme} progress="bar" transition={[]} transitionDuration={0}>
         <Slide bgColor="#171C22" bgImage={require('./images/graph-wash.png')}>
           <Heading size={2} textColor="white">
-            Connecting the dots with{' '}
+            Building APIs with{' '}
             <S type="bold" textColor="pink">
               GraphQL
             </S>
@@ -56,6 +56,7 @@ export default class Presentation extends React.Component {
               It allows clients to define the structure of the data required.
               They can get many resources in a single request.
             </ListItem>
+            <ListItem>Programming language agnostic</ListItem>
           </List>
         </Slide>
         <Slide>
@@ -184,6 +185,23 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide bgColor="bgCode">
+          <GqlCode>
+            {`
+{
+  shows {
+    id
+    title
+    episodes {
+      id
+      overview
+    }
+  }
+}
+  `}
+          </GqlCode>
+        </Slide>
+
+        <Slide bgColor="bgCode">
           <Layout>
             <Fill>
               <GqlCode>
@@ -217,27 +235,10 @@ export default class Presentation extends React.Component {
     { ... }
   }
 }
-            `}
+                `}
               </JsonCode>
             </Fill>
           </Layout>
-        </Slide>
-
-        <Slide bgColor="bgCode">
-          <GqlCode>
-            {`
-{
-  shows {
-    id
-    title
-    episodes {
-      id
-      overview
-    }
-  }
-}
-  `}
-          </GqlCode>
         </Slide>
 
         <Slide bgColor="bgCode">
@@ -410,19 +411,27 @@ schema {
         </Slide>
 
         <Slide>
-          <iframe
-            src="http://graphql.org/swapi-graphql"
-          />
+          <iframe src="http://graphql.org/swapi-graphql" />
+        </Slide>
+
+        <Slide>
+          <iframe src="https://apis.guru/graphql-voyager/" />
         </Slide>
 
         <Slide>
           <Heading size={2}>Query validation</Heading>
-          <Image src={require('./images/query-validation.png')} margin="40px auto"/>
+          <Image
+            src={require('./images/query-validation.png')}
+            margin="40px auto"
+          />
         </Slide>
 
         <Slide>
           <Heading size={2}>IDE Integration</Heading>
-          <Image src={require('./images/ide-integration.gif')} margin="40px auto"/>
+          <Image
+            src={require('./images/ide-integration.gif')}
+            margin="40px auto"
+          />
         </Slide>
 
         <Slide>
@@ -479,8 +488,24 @@ const Todos = () => (
           </JsCode>
         </Slide>
 
+        <Slide bgColor="bgCode">
+          <JsCode>{`
+<Mutation mutation={addToCart} variables={{id}}>
+    {(addToCart, { loading }) => (
+        <button disabled={loading} onClick={addToCart}>
+            Add{loading && 'ing'} to cart
+        </button>
+    )}
+</Mutation>
+          `}</JsCode>
+        </Slide>
+
         <Slide>
-          <Heading size={2}>Query composition via fragments</Heading>
+          <Heading size={2}>More ideas</Heading>
+          <List>
+            <ListItem>Query composition via fragments</ListItem>
+            <ListItem>Gql for local state?</ListItem>
+          </List>
         </Slide>
 
         <Slide>
@@ -505,7 +530,20 @@ const Todos = () => (
         </Slide>
 
         <Slide>
-          <Heading>Thanks</Heading>
+          <Quote textAlign="left">
+            If you suck at providing REST API, you will suck at providing
+            GraphQL API
+            <Text textAlign="left" margin="40px 0">
+              - Arnaud Lauret
+            </Text>
+          </Quote>
+        </Slide>
+
+        <Slide>
+          <Heading>Questions?</Heading>
+          <Heading size={5} margin="40px 0 0 0">
+            @axelhzf
+          </Heading>
         </Slide>
       </Deck>
     );

@@ -13,7 +13,6 @@
   },
   "scripts": {
     "start": "parcel index.html",
-    "build": "rm -rf docs && react-scripts build && mv build docs"
-  },
-  "homepage": "."
+    "build": "rm -rf docs && parcel build -d docs index.html "
+  }
 }
